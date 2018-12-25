@@ -36,7 +36,7 @@ blocks:
       jobs:
         - name: Setup Database
           commands:
-            - bin/rails db:create
+            - rake db:create db:migrate RAILS_ENV=test
         - name: RSpec
           commands:
             - checkout
@@ -52,9 +52,9 @@ blocks:
           - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock)
           - bundle install --deployment --path vendor/bundle
       jobs:
-        - name: Setup Database
-          commands:
-            - bin/rails db:create
+        # - name: Setup Database
+        #   commands:
+        #     - rake db:create db:migrate RAILS_ENV=test
         - name: Cucumber
           commands:
             - checkout
