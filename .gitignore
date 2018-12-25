@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore ruby version config.
-/.ruby-version
+# /.ruby-version
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
