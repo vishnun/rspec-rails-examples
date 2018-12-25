@@ -27,20 +27,14 @@ blocks:
       env_vars:
         - name: RAILS_ENV
           value: test
-      prologue:
-        commands:
-          - checkout
-          - sem-version ruby 2.3.8
-          - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock)
-          - bundle install --deployment --path vendor/bundle
       jobs:
-        - name: Setup Database
-          commands:
-            - checkout
-            - sem-service start postgres
-            - rake db:create db:migrate
         - name: RSpec
           commands:
+            - checkout
+            - sem-version ruby 2.3.8
+            - cache restore gems-$SEMAPHORE_GIT_BRANCH-$(checksum Gemfile.lock)
+            - bundle install --deployment --path vendor/bundle
+            - rake db:create db:migrate
             - rspec --exclude-pattern "**/featues/*_spec.rb"
 
   - name: "Integration tests"
