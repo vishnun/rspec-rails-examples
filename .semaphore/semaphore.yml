@@ -38,10 +38,10 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres
-            - bundle exec rake db:create db:migrate
+            - rake db:create db:migrate
         - name: RSpec
           commands:
-            - bundle exec rspec --exclude-pattern "**/featues/*_spec.rb"
+            - rspec --exclude-pattern "**/featues/*_spec.rb"
 
   - name: "Integration tests"
     task:
@@ -59,12 +59,4 @@ blocks:
           commands:
             - checkout
             - echo "make cucumber"
-            - bundle exec rspec --pattern spec/featues/*.rb
-
-  - name: "Push Image"
-    task:
-      jobs:
-        - name: Push
-          commands:
-            - checkout
-            - echo "make docker.push"
+            - rspec --pattern spec/featues/*.rb
