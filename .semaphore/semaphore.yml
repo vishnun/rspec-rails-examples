@@ -36,11 +36,11 @@ blocks:
       jobs:
         - name: Setup Database
           commands:
-            - rake db:create db:migrate RAILS_ENV=test
-        - name: RSpec
-          commands:
             - checkout
             - sem-service start postgres
+            - bundle exec rake db:create db:migrate
+        - name: RSpec
+          commands:
             - bundle exec rspec --exclude-pattern "**/featues/*_spec.rb"
 
   - name: "Integration tests"
